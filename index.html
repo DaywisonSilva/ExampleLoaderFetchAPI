@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <button id="send">Enviar Requisição</button>
+<script>    
+    let button = document.querySelector('#send');
+    button.addEventListener('click', getDataAPI)
+
+    async function getDataAPI () {
+        try{
+            button.textContent = 'Mudei'
+            await fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados/33|35/microrregioes', {method: 'GET'})
+                .then(response => {
+                    response.json()
+                    .then(response => {
+                    console.log(response)
+                })
+            })
+        }catch(e) {
+            console.log(e)
+        }
+        finally {
+            button.textContent = 'Requisição Acabou'
+        }
+    }
+</script>
+
+</body>
+</html>
